@@ -14,7 +14,6 @@ from yaml import load as load_yaml, Loader
 from distutils.util import strtobool
 from ujson import loads as load_json
 
-
 from backend.serializers import ShopSerializer, CategorySerializer, UserSerializer, ContactSerializer, \
     ProductInfoSerializer, OrderSerializer, OrderItemSerializer
 
@@ -36,10 +35,12 @@ class ShopViewSet(ModelViewSet):
     queryset = Shop.objects.all()
     serializer_class = ShopSerializer
 
+
 class RegisterAccount(APIView):
     """
     Для регистрации покупателей
     """
+
     # Регистрация методом POST
     def post(self, request, *args, **kwargs):
 
@@ -76,6 +77,7 @@ class ConfirmAccount(APIView):
     """
     Класс для подтверждения почтового адреса
     """
+
     # Регистрация методом POST
     def post(self, request, *args, **kwargs):
 
@@ -141,6 +143,7 @@ class LoginAccount(APIView):
     """
     Класс для авторизации пользователей
     """
+
     # Авторизация методом POST
     def post(self, request, *args, **kwargs):
 
@@ -162,6 +165,7 @@ class PartnerUpdate(APIView):
     """
     Класс для обновления прайса от поставщика
     """
+
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return JsonResponse({'Status': False, 'Error': 'Log in required'}, status=403)
@@ -305,6 +309,7 @@ class ProductInfoView(ReadOnlyModelViewSet):
 
         return queryset
 
+
 class PartnerState(APIView):
     """
     Класс для работы со статусом поставщика
@@ -344,6 +349,7 @@ class PartnerOrders(APIView):
     """
     Класс для получения заказов поставщиками
     """
+
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return JsonResponse({'Status': False, 'Error': 'Log in required'}, status=403)
