@@ -1,4 +1,4 @@
-# добавление пользователя
+# добавление покупателя
 POST http://127.0.0.1:8000/api/v1/user/register
 Content-Type: application/json
 
@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-
+# добавление магазина
 POST http://127.0.0.1:8000/api/v1/user/register
 Content-Type: application/json
 
@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 
 ###
-
+#подтверждение магазина
 POST http://127.0.0.1:8000/api/v1/user/register/confirm
 Content-Type: application/json
 
@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ###
-
+#логин магазина
 POST http://127.0.0.1:8000/api/v1/user/login
 Content-Type: application/json
 
@@ -46,6 +46,25 @@ Content-Type: application/json
     "password": "2a2b2cD$"
 }
 
+###
+#подтверждение покупателя
+POST http://127.0.0.1:8000/api/v1/user/register/confirm
+Content-Type: application/json
+
+{
+    "email": "email1@ru.ru",
+    "token": "35ff4689ce02d2ddb3c7ea"
+}
+
+###
+#логин покупателя
+POST http://127.0.0.1:8000/api/v1/user/login
+Content-Type: application/json
+
+{
+    "email": "email1@ru.ru",
+    "password": "1a1b1cD$"
+}
 ###
 
 # обновление прайса поставщика
@@ -56,3 +75,120 @@ Authorization: Token 36aa6c2b02bb07c54cfbab5a3d8683498b4d9f2f
 {
   "url": "https://raw.githubusercontent.com/netology-code/pd-diplom/master/data/shop1.yaml"
 }
+
+
+###
+
+GET http://127.0.0.1:8000/api/v1/user/details
+Authorization: Token 36aa6c2b02bb07c54cfbab5a3d8683498b4d9f2f
+
+###
+# контакт магазина
+POST http://127.0.0.1:8000/api/v1/user/contact
+Authorization: Token 36aa6c2b02bb07c54cfbab5a3d8683498b4d9f2f
+Content-Type: application/json
+
+{
+    "city": "Saint Petersburg",
+    "street": "Nevsky Prospekt",
+    "house": "106",
+    "structure": "1",
+    "building": "A",
+    "apartment": "9",
+    "phone": "791234567890",
+    "user": 5
+}
+
+###
+# контакт покупателя
+POST http://127.0.0.1:8000/api/v1/user/contact
+Authorization: Token ab94042e539d5d8e60b53edb72407acbc559beff
+Content-Type: application/json
+
+{
+    "city": "Saint Petersburg",
+    "street": "Piskaryovskiy prospekt",
+    "house": "5",
+    "structure": "1",
+    "building": "A",
+    "apartment": "19",
+    "phone": "79219638574",
+    "user": 5
+}
+
+###
+
+GET http://127.0.0.1:8000/api/v1/user/contact
+Authorization: Token 36aa6c2b02bb07c54cfbab5a3d8683498b4d9f2f
+
+###
+
+GET http://127.0.0.1:8000/api/v1/shops
+
+###
+
+POST http://127.0.0.1:8000/api/v1/shops/
+Content-Type: application/json
+
+{
+    "name": "Euroset",
+    "url": null,
+    "state": true,
+    "user": 5
+}
+
+###
+
+GET http://127.0.0.1:8000/api/v1/categories
+
+###
+
+GET http://127.0.0.1:8000/api/v1/products?shop_id=1&category="Смартфоны"
+
+###
+
+GET http://127.0.0.1:8000/api/v1/partner/state
+Authorization: Token 36aa6c2b02bb07c54cfbab5a3d8683498b4d9f2f
+
+###
+
+POST http://127.0.0.1:8000/api/v1/basket
+Content-Type: application/x-www-form-urlencoded
+Authorization: Token ab94042e539d5d8e60b53edb72407acbc559beff
+
+items=[{"product_info": 1, "quantity": 5}]
+
+###
+GET http://127.0.0.1:8000/api/v1/basket
+Authorization: Token ab94042e539d5d8e60b53edb72407acbc559beff
+
+###
+
+PUT http://127.0.0.1:8000/api/v1/basket
+Content-Type: application/x-www-form-urlencoded
+Authorization: Token ab94042e539d5d8e60b53edb72407acbc559beff
+
+items=[{"id": 5, "quantity": 2}]
+
+####
+
+DELETE http://127.0.0.1:8000/api/v1/basket
+Content-Type: application/x-www-form-urlencoded
+Authorization: Token ab94042e539d5d8e60b53edb72407acbc559beff
+
+items=10
+
+####
+
+POST http://127.0.0.1:8000/api/v1/order
+Content-Type: application/json
+Authorization: Token ab94042e539d5d8e60b53edb72407acbc559beff
+
+{
+"id":"5",
+"contact":"3"
+}
+
+###
+GET http://127.0.0.1:8000/api/v1/order
+Authorization: Token ab94042e539d5d8e60b53edb72407acbc559beff
