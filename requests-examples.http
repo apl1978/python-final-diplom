@@ -1,8 +1,58 @@
+# добавление пользователя
+POST http://127.0.0.1:8000/api/v1/user/register
+Content-Type: application/json
+
+{
+  "first_name": "Name1",
+    "last_name": "LastName1",
+    "email": "email1@ru.ru",
+    "password": "1a1b1cD$",
+    "company": "Company1",
+    "position": "Position1"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/v1/user/register
+Content-Type: application/json
+
+{
+  "first_name": "Name2",
+    "last_name": "LastName2",
+    "email": "email3@ru.ru",
+    "password": "2a2b2cD$",
+    "company": "Company2",
+    "position": "Position2",
+    "type": "shop"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/v1/user/register/confirm
+Content-Type: application/json
+
+{
+    "email": "email3@mail.ru",
+    "token": "497889e9ef"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/v1/user/login
+Content-Type: application/json
+
+{
+    "email": "email3@ru.ru",
+    "password": "2a2b2cD$"
+}
+
+###
+
 # обновление прайса поставщика
 POST http://127.0.0.1:8000/api/v1/partner/update
 Content-Type: application/json
-
+Authorization: Token 36aa6c2b02bb07c54cfbab5a3d8683498b4d9f2f
 
 {
-  "url": "https://github.com/netology-code/python-final-diplom/blob/master/data/shop1.yaml"
+  "url": "https://raw.githubusercontent.com/netology-code/pd-diplom/master/data/shop1.yaml"
 }
