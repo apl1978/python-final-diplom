@@ -26,6 +26,8 @@ python manage.py runserver
 
 Примеры запросов в файле requests-examples.http.
 
+Страница описания API: http://127.0.0.1:8000/api/schema/swagger-ui/
+
 ## Описание
 
 **Клиент (покупатель):**

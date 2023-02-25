@@ -7,3 +7,4 @@ pyyaml
 ujson
 requests
 python-dotenv
+drf-spectacular
