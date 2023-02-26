@@ -9,3 +9,5 @@ requests
 python-dotenv
 drf-spectacular
 django-allauth
+coverage
+model_bakery
