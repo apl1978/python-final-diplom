@@ -1,0 +1,42 @@
+version: '3.9'
+services:
+    postgredb:
+        image: postgres:13.0-alpine
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+            - ./logs:/var/log
+        environment:
+            POSTGRES_DB: "netology_diplom1"
+            POSTGRES_USER: "postgres"
+            POSTGRES_PASSWORD: "postgres"
+        ports:
+          - "5432:5432"
+
+    django:
+        build: .
+        ports:
+            - '8000:8000'
+        command: >
+            sh -c "python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
+        depends_on:
+            -   postgredb
+        env_file:
+            -   .env
+
+    redis:
+        image: redis:alpine
+        ports:
+            - '6379:6379'
+
+    celery:
+        build: .
+        command: celery -A orders worker
+        depends_on:
+            -   redis
+        env_file:
+            -   .env
+
+
+volumes:
+    pgdata:

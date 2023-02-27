@@ -3,30 +3,19 @@
 Приложение предназначено для автоматизации закупок в розничной сети. Пользователи сервиса — покупатель (менеджер торговой сети, который закупает товары для продажи в магазине) и поставщик товаров.
 
 **Установка:**
-1. Установить зависимости 
-```bash
-pip install -r requirements.txt
-```
-2. Переименовать файл .env_example в .env и прописать в нем настройки подключения к базе и электронной почте.
+1. Переименовать файл .env_example в .env и прописать в нем настройки подключения к электронной почте.
 
-3. Создать базу в postgres и прогнать миграции:
-
-```base
-manage.py makemigrations
-manage.py migrate
-```
-
-4. Запустить сервер:
+2. Запустить проект:
 
 ```bash
-python manage.py runserver
+docker-compose up
 ```
-5. Запустить тесты:
+3. Запустить тесты:
 
 ```bash
 python manage.py test 
 ```
-6. Покрытие тестами:
+4. Покрытие тестами:
 
 ```bash
 coverage run --source=. --omit=*/migrations/* manage.py test
@@ -52,6 +41,16 @@ python manage.py createsuperuser
 Примеры запросов в файле requests-examples.http.
 
 Страница описания API: http://127.0.0.1:8000/api/schema/swagger-ui/
+
+**Технологии:**
+- Python 3
+- Django
+- django Rest Framework
+- PostgreSQL
+- Celery
+- Redis
+- Docker
+- Docker-compose.
 
 ## Описание
 

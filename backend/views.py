@@ -20,8 +20,8 @@ from backend.serializers import ShopSerializer, CategorySerializer, UserSerializ
 
 from backend.models import Shop, Category, ProductInfo, Product, ProductParameter, Parameter, ConfirmEmailToken, \
     Contact, Order, OrderItem
-from backend.signals import new_user_registered, new_order
 
+from .tasks import new_user_registered, new_order
 
 class CategoryViewSet(ModelViewSet):
     """ Класс для просмотра списка категорий """
@@ -67,7 +67,8 @@ class RegisterAccount(APIView):
                     user = user_serializer.save()
                     user.set_password(request.data['password'])
                     user.save()
-                    new_user_registered.send(sender=self.__class__, user_id=user.id)
+                    token, _ = ConfirmEmailToken.objects.get_or_create(user_id=user.id)
+                    new_user_registered.delay(user.email, token.key)
                     return JsonResponse({'Status': True})
                 else:
                     return JsonResponse({'Status': False, 'Errors': user_serializer.errors})
@@ -512,7 +513,7 @@ class OrderView(APIView):
                     return JsonResponse({'Status': False, 'Errors': 'Неправильно указаны аргументы'})
                 else:
                     if is_updated:
-                        new_order.send(sender=self.__class__, user_id=request.user.id)
+                        new_order.delay(user_id=request.user.id)
                         return JsonResponse({'Status': True})
 
         return JsonResponse({'Status': False, 'Errors': 'Не указаны все необходимые аргументы'})

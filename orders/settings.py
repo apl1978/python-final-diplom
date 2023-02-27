@@ -46,11 +46,11 @@ INSTALLED_APPS = [
     'django_rest_passwordreset',
     'drf_spectacular',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.vk',
-    'allauth.socialaccount.providers.yandex',
+     'allauth',
+     'allauth.account',
+     'allauth.socialaccount',
+     'allauth.socialaccount.providers.vk',
+     'allauth.socialaccount.providers.yandex',
 ]
 
 MIDDLEWARE = [
@@ -183,4 +183,9 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 
-SITE_ID = 1
+SITE_ID=1
+
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
